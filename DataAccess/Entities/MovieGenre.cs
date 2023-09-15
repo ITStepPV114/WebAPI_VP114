@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Entities
 {
-    internal class MovieGenre
+    public class MovieGenre
     {
+        //composition  keys: MoveId+GenreId
+        public int MoveId { get; set; }
+        public  int GenreId { get; set;}
+
+        public Movie? Movie { get; set;}
+        public Genre? Genre { get; set; }
     }
 }
