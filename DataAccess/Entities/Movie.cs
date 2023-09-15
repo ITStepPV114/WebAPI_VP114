@@ -13,6 +13,7 @@ namespace DataAccess.Entities
         public int Year { get; set; }
         public string? Description { get; set; }
         public TimeSpan Duration { get; set; }
-        public string Genre { get; set; }
+        
+        public ICollection<MovieGenre>? Genres { get; }
     }
 }

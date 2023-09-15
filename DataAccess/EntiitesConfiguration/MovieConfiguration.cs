@@ -20,6 +20,9 @@ namespace DataAccess.EntiitesConfiguration
             builder.Property(x => x.Description)
                    .HasMaxLength(1024);
 
+            //set many to many relation
+            builder.HasMany(x=>x.Genres).WithOne(x => x.Movie).HasForeignKey(x=>x.MoveId);
+
 
 
         }
