@@ -11,6 +11,6 @@ namespace DataAccess.Entities
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public ICollection<Movie> Movie { get; }
+        public ICollection<MovieGenre>? Movies { get; }
     }
 }

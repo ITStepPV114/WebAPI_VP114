@@ -24,7 +24,9 @@ namespace DataAccess.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.SeedGenres();
             modelBuilder.SeedMovies();
+            modelBuilder.SeedMovieGenre();
             
             #region Fluent API => Configurations
             ////Set Primary Key
@@ -47,6 +49,8 @@ namespace DataAccess.Data
             // modelBuilder.ApplyConfigurationsFromAssembly(typeof(ShopMVCDbContext).Assembly);
             // or 
             modelBuilder.ApplyConfiguration(new MovieConfiguration());
+            modelBuilder.ApplyConfiguration(new GenreConfiguration());
+            modelBuilder.ApplyConfiguration(new MovieGenreConfiguration());
 
 
         }

@@ -43,7 +43,10 @@ namespace DataAccess.Data
         {
             modelBuilder.Entity<Movie>().HasData(new Movie[] {
                 new Movie(){
-                Id=1, Title="Dune", Description="Dune is a 2021 American epic science fiction film directed by Denis Villeneuve, who co-wrote the screenplay with Jon Spaihts and Eric Roth",Year=2021, Duration=new TimeSpan(2,35,0), Genre="Fantasy"
+                Id=1, Title="Dune", 
+                    Description="Dune is a 2021 American epic science fiction film directed by Denis Villeneuve, who co-wrote the screenplay with Jon Spaihts and Eric Roth",
+                    Year=2021, 
+                    Duration=new TimeSpan(2,35,0)
                 },
                    new Movie(){
                     Id = 2,

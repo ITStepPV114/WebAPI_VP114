@@ -20,7 +20,7 @@ namespace WebAPI.Controllers
         //[HttpGet("/movies")] //GET: ~/movies
         public IActionResult Get() {
 
-            return Ok(_repository.Get());
+            return Ok(_repository.Get(includeProperties: new[] { "Genres" }).ToList());
         }
 
         [HttpGet("{id}")] 
