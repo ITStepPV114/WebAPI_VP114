@@ -21,7 +21,7 @@ namespace DataAccess.EntiitesConfiguration
                    .HasMaxLength(1024);
 
             //set many to many relation
-            builder.HasMany(x=>x.Genres).WithOne(x => x.Movie).HasForeignKey(x=>x.MoveId);
+            builder.HasMany(x=>x.Genres).WithOne(x => x.Movie).HasForeignKey(x=>x.MovieId);
 
 
 

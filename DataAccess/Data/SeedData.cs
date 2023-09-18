@@ -90,26 +90,26 @@ namespace DataAccess.Data
         public static void SeedMovieGenre(this ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<MovieGenre>().HasData(new MovieGenre[] {
-                new MovieGenre(){ MoveId=1, GenreId=1},
-                new MovieGenre(){ MoveId=1, GenreId=2},
-                new MovieGenre(){ MoveId=1, GenreId=3},
+                new MovieGenre(){ MovieId=1, GenreId=1},
+                new MovieGenre(){ MovieId=1, GenreId=2},
+                new MovieGenre(){ MovieId=1, GenreId=3},
 
-                new MovieGenre(){ MoveId=2, GenreId=1},
-                new MovieGenre(){ MoveId=2, GenreId=2},
-                new MovieGenre(){ MoveId=2, GenreId=3},
+                new MovieGenre(){ MovieId=2, GenreId=1},
+                new MovieGenre(){ MovieId=2, GenreId=2},
+                new MovieGenre(){ MovieId=2, GenreId=3},
 
-                new MovieGenre(){ MoveId=3, GenreId=1},
-                new MovieGenre(){ MoveId=3, GenreId=3},
-                new MovieGenre(){ MoveId=3, GenreId=5},
+                new MovieGenre(){ MovieId=3, GenreId=1},
+                new MovieGenre(){ MovieId=3, GenreId=3},
+                new MovieGenre(){ MovieId=3, GenreId=5},
 
-                new MovieGenre(){ MoveId=4, GenreId=1},
-                new MovieGenre(){ MoveId=4, GenreId=7},
+                new MovieGenre(){ MovieId=4, GenreId=1},
+                new MovieGenre(){ MovieId=4, GenreId=7},
 
-                new MovieGenre(){ MoveId=5, GenreId=1},
-                new MovieGenre(){ MoveId=5, GenreId=7},
+                new MovieGenre(){ MovieId=5, GenreId=1},
+                new MovieGenre(){ MovieId=5, GenreId=7},
 
-                new MovieGenre(){ MoveId=6, GenreId=1},
-                new MovieGenre(){ MoveId=6, GenreId=3}
+                new MovieGenre(){ MovieId=6, GenreId=1},
+                new MovieGenre(){ MovieId=6, GenreId=3}
                 
             });
           }

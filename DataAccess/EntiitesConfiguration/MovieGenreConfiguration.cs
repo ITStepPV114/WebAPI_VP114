@@ -14,7 +14,7 @@ namespace DataAccess.EntiitesConfiguration
         public void Configure(EntityTypeBuilder<MovieGenre> builder)
         {
             //set PrimaryKey
-            builder.HasKey(x => new { x.MoveId, x.GenreId });
+            builder.HasKey(x => new { x.MovieId, x.GenreId });
         }
     }
 }
