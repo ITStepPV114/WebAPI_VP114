@@ -45,7 +45,6 @@ namespace BusinessLogic.Services
 
         public async Task<IEnumerable<Movie>> GetAllAsync()
         {
-
             return await _repoMovie.GetAsync(includeProperties: new[] {"Genres"});
         }
 
@@ -55,6 +54,13 @@ namespace BusinessLogic.Services
                 return null;
                 //throw new HttpRequestException("Not Found");
             return await _repoMovie.GetByIDAsync(id);
+        }
+
+        public async Task<IEnumerable<Genre>> GetGenresAsync()
+        {
+            return await  _repoGenre.GetAsync();
+
+
         }
     }
 }

@@ -3,6 +3,8 @@ using BusinessLogic.Services;
 using DataAccess;
 using DataAccess.Data;
 using DataAccess.Interfaces;
+using FluentValidation.AspNetCore;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
@@ -37,6 +39,8 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
+builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddScoped<IMoviesService, MoviesService>();
 var app = builder.Build();
