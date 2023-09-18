@@ -1,4 +1,5 @@
-﻿using DataAccess.Entities;
+﻿using BusinessLogic.Interfaces;
+using DataAccess.Entities;
 using DataAccess.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -9,10 +10,10 @@ namespace WebAPI.Controllers
     [ApiController]
     public class MoviesController : ControllerBase
     {
-        private readonly IRepository<Movie> _repository;
-        public MoviesController(IRepository<Movie> repository )
+        private readonly IMoviesService _moviesService;
+        public MoviesController(IMoviesService moviesService)
         {
-            _repository = repository;
+            _moviesService = moviesService;
         }
 
         [HttpGet] //GET: ~/api/movies
@@ -22,33 +23,30 @@ namespace WebAPI.Controllers
         {
          //    Movies.Include(x => x.Genres).ThenInclude(x => x.Genre);
          
-            return Ok(await _repository.GetAsync(includeProperties: new[] {"Genres"}));
+            return Ok(await _moviesService.GetAllAsync());
         }
 
         [HttpGet("{id}")] 
         public async Task<IActionResult> Get([FromRoute] int id)  //default FromQuery   => ~/api/movies?id=2   //FromRoute => ~/api/movies/2
         { 
-            return Ok(await _repository.GetByIDAsync(id));
+            return Ok(await _moviesService.GetByIdAsync(id));
         }
         [HttpPost("Create")]
         public async Task<IActionResult> Create(Movie movie) {
-            await _repository.InsertAsync(movie);
-            await _repository.SaveAsync();
+            await _moviesService.CreateAsync(movie);
             return Ok();
         }
 
         [HttpPut("Edit")]
         public async Task<IActionResult> Edit(Movie movie)
         {
-            await _repository.UpdateAsync(movie);
-            await _repository.SaveAsync();
+            await _moviesService.EditAsync(movie);
             return Ok();
         }
 
         [HttpDelete]
         public async Task<IActionResult> Delete(int id) {
-            await _repository.DeleteAsync(id);
-            await _repository.SaveAsync();
+            await _moviesService.DeleteAsync(id);
             return Ok();
         }
 
