@@ -1,3 +1,5 @@
+using BusinessLogic.Interfaces;
+using BusinessLogic.Services;
 using DataAccess;
 using DataAccess.Data;
 using DataAccess.Interfaces;
@@ -34,6 +36,9 @@ builder.Services.AddSwaggerGen(options =>
         Example = new OpenApiString("00:00:00")
     });
 });
+
+
+builder.Services.AddScoped<IMoviesService, MoviesService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

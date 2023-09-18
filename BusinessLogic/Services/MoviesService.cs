@@ -12,9 +12,16 @@ namespace BusinessLogic.Services
     public class MoviesService : IMoviesService
     {
         private readonly IRepository<Movie> _repoMovie;
-        public MoviesService(IRepository<Movie> repoMovie)
+        private readonly IRepository<Genre> _repoGenre;
+        private readonly IRepository<MovieGenre> _repoMovieGenre;
+
+        public MoviesService(IRepository<Movie> repoMovie,
+                             IRepository<Genre> repoGenre,
+                             IRepository<MovieGenre> repoMovieGenre)
         {
             _repoMovie = repoMovie;
+            _repoGenre = repoGenre;
+            _repoMovieGenre = repoMovieGenre;
         }
         public async Task CreateAsync(Movie movie)
         {
@@ -38,12 +45,13 @@ namespace BusinessLogic.Services
 
         public async Task<IEnumerable<Movie>> GetAllAsync()
         {
+
             return await _repoMovie.GetAsync(includeProperties: new[] {"Genres"});
         }
 
         public async Task<Movie?> GetByIdAsync(int id)
         {
-            if (await _repoMovie.GetByIDAsync(id) == null)
+            if ((await _repoMovie.GetByIDAsync(id)) == null)
                 return null;
                 //throw new HttpRequestException("Not Found");
             return await _repoMovie.GetByIDAsync(id);
