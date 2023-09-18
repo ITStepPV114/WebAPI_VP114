@@ -1,4 +1,5 @@
-﻿using BusinessLogic.Interfaces;
+﻿using BusinessLogic.DTOs;
+using BusinessLogic.Interfaces;
 using DataAccess.Entities;
 using DataAccess.Interfaces;
 using Microsoft.AspNetCore.Http;
@@ -32,13 +33,13 @@ namespace WebAPI.Controllers
             return Ok(await _moviesService.GetByIdAsync(id));
         }
         [HttpPost("Create")]
-        public async Task<IActionResult> Create(Movie movie) {
+        public async Task<IActionResult> Create(MovieDto movie) {
             await _moviesService.CreateAsync(movie);
             return Ok();
         }
 
         [HttpPut("Edit")]
-        public async Task<IActionResult> Edit(Movie movie)
+        public async Task<IActionResult> Edit(MovieDto movie)
         {
             await _moviesService.EditAsync(movie);
             return Ok();

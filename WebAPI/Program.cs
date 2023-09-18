@@ -42,6 +42,8 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
 
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 builder.Services.AddScoped<IMoviesService, MoviesService>();
 var app = builder.Build();
 

@@ -1,6 +1,9 @@
-﻿using BusinessLogic.Interfaces;
+﻿using AutoMapper;
+using BusinessLogic.DTOs;
+using BusinessLogic.Interfaces;
 using DataAccess.Entities;
 using DataAccess.Interfaces;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,18 +17,21 @@ namespace BusinessLogic.Services
         private readonly IRepository<Movie> _repoMovie;
         private readonly IRepository<Genre> _repoGenre;
         private readonly IRepository<MovieGenre> _repoMovieGenre;
+        private readonly IMapper _mapper;
 
         public MoviesService(IRepository<Movie> repoMovie,
                              IRepository<Genre> repoGenre,
-                             IRepository<MovieGenre> repoMovieGenre)
+                             IRepository<MovieGenre> repoMovieGenre,
+                             IMapper mapper )
         {
             _repoMovie = repoMovie;
             _repoGenre = repoGenre;
             _repoMovieGenre = repoMovieGenre;
+            _mapper = mapper;
         }
-        public async Task CreateAsync(Movie movie)
+        public async Task CreateAsync(MovieDto movie)
         {
-            await _repoMovie.InsertAsync(movie);
+            await _repoMovie.InsertAsync(_mapper.Map<Movie>(movie));
             await _repoMovie.SaveAsync();
         }
 
@@ -37,28 +43,30 @@ namespace BusinessLogic.Services
             await _repoMovie.SaveAsync();
         }
 
-        public async Task EditAsync(Movie movie)
+        public async Task EditAsync(MovieDto movie)
         {
-            await _repoMovie.UpdateAsync(movie);
+            await _repoMovie.UpdateAsync(_mapper.Map<Movie>(movie));
             await _repoMovie.SaveAsync();
         }
 
-        public async Task<IEnumerable<Movie>> GetAllAsync()
+        public async Task<IEnumerable<MovieDto>> GetAllAsync()
         {
-            return await _repoMovie.GetAsync(includeProperties: new[] {"Genres"});
+            var movies= await _repoMovie.GetAsync(includeProperties: new[] { "Genres" });
+            return _mapper.Map<IEnumerable<MovieDto>>(movies);
         }
 
-        public async Task<Movie?> GetByIdAsync(int id)
+        public async Task<MovieDto?> GetByIdAsync(int id)
         {
             if ((await _repoMovie.GetByIDAsync(id)) == null)
                 return null;
                 //throw new HttpRequestException("Not Found");
-            return await _repoMovie.GetByIDAsync(id);
+            return _mapper.Map<MovieDto>(await _repoMovie.GetByIDAsync(id));
         }
 
-        public async Task<IEnumerable<Genre>> GetGenresAsync()
+        public async Task<IEnumerable<GenreDto>> GetGenresAsync()
         {
-            return await  _repoGenre.GetAsync();
+          List<Genre> genres = (await  _repoGenre.GetAsync()).ToList();
+            return _mapper.Map<IEnumerable<GenreDto>>(genres);
 
 
         }
