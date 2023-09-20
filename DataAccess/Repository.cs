@@ -1,4 +1,6 @@
-﻿using DataAccess.Data;
+﻿using Ardalis.Specification.EntityFrameworkCore;
+using Ardalis.Specification;
+using DataAccess.Data;
 using DataAccess.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
@@ -85,6 +87,26 @@ namespace DataAccess
         public async Task SaveAsync()
         {
             await _context.SaveChangesAsync();
+        }
+
+        // working with specifications
+        public async Task<IEnumerable<TEntity>> GetListBySpec(ISpecification<TEntity> specification)
+        {
+            return await ApplySpecification(specification).ToListAsync();
+        }
+
+        public async Task<TEntity?> GetItemBySpec(ISpecification<TEntity> specification)
+        {
+            return await ApplySpecification(specification).FirstOrDefaultAsync();
+        }
+
+        // select... from... join... join... where.. order by
+        //
+
+        private IQueryable<TEntity> ApplySpecification(ISpecification<TEntity> specification)
+        {
+            var evaluator = new SpecificationEvaluator();
+            return evaluator.GetQuery(dbSet, specification);
         }
     }
 

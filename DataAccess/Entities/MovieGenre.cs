@@ -8,7 +8,7 @@ namespace DataAccess.Entities
 {
     public class MovieGenre
     {
-        //composition  keys: MoveId+GenreId
+        //composition  keys: MovieId+GenreId
         public int MovieId { get; set; }
         public  int GenreId { get; set;}
 

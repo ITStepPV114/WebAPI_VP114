@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BusinessLogic.DTOs;
 using BusinessLogic.Interfaces;
+using BusinessLogic.Specifications;
 using DataAccess.Entities;
 using DataAccess.Interfaces;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
@@ -51,16 +52,18 @@ namespace BusinessLogic.Services
 
         public async Task<IEnumerable<MovieDto>> GetAllAsync()
         {
-            var movies= await _repoMovie.GetAsync(includeProperties: new[] { "Genres" });
+            // var movies= await _repoMovie.GetAsync(orderBy: x=>x.OrderByDescending(m=>m.Title), includeProperties: new[] { "Genres" });
+            var movies = await _repoMovie.GetListBySpec(new MoviesSpec.OrderedAll());
             return _mapper.Map<IEnumerable<MovieDto>>(movies);
         }
 
         public async Task<MovieDto?> GetByIdAsync(int id)
         {
-            if ((await _repoMovie.GetByIDAsync(id)) == null)
+            var movie= await _repoMovie.GetItemBySpec(new MoviesSpec.ById(id));
+            if (movie == null)
                 return null;
                 //throw new HttpRequestException("Not Found");
-            return _mapper.Map<MovieDto>(await _repoMovie.GetByIDAsync(id));
+            return _mapper.Map<MovieDto>(movie);
         }
 
         public async Task<IEnumerable<GenreDto>> GetGenresAsync()
