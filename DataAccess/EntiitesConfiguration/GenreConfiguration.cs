@@ -1,4 +1,4 @@
-﻿using DataAccess.Entities;
+﻿using Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess.EntiitesConfiguration
+namespace Infrastructure.EntiitesConfiguration
 {
     public class GenreConfiguration:IEntityTypeConfiguration<Genre>
     {

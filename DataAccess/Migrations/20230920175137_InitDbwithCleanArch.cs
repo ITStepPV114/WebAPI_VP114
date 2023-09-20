@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace DataAccess.Migrations
+namespace Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class InitDb : Migration
+    public partial class InitDbwithCleanArch : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -46,12 +46,12 @@ namespace DataAccess.Migrations
                 name: "MovieGenres",
                 columns: table => new
                 {
-                    MoveId = table.Column<int>(type: "int", nullable: false),
+                    MovieId = table.Column<int>(type: "int", nullable: false),
                     GenreId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MovieGenres", x => new { x.MoveId, x.GenreId });
+                    table.PrimaryKey("PK_MovieGenres", x => new { x.MovieId, x.GenreId });
                     table.ForeignKey(
                         name: "FK_MovieGenres_Genres_GenreId",
                         column: x => x.GenreId,
@@ -59,8 +59,8 @@ namespace DataAccess.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_MovieGenres_Movies_MoveId",
-                        column: x => x.MoveId,
+                        name: "FK_MovieGenres_Movies_MovieId",
+                        column: x => x.MovieId,
                         principalTable: "Movies",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -95,7 +95,7 @@ namespace DataAccess.Migrations
 
             migrationBuilder.InsertData(
                 table: "MovieGenres",
-                columns: new[] { "GenreId", "MoveId" },
+                columns: new[] { "GenreId", "MovieId" },
                 values: new object[,]
                 {
                     { 1, 1 },

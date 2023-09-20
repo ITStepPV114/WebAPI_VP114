@@ -4,11 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.DTOs
+namespace Core.Entities
 {
-    public class GenreDto
+    public class Genre
     {
         public int Id { get; set; }
         public string Name { get; set; }
+
+        public ICollection<MovieGenre>? Movies { get; }
     }
 }

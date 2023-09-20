@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DataAccess.Entities;
+using Core.Entities;
 using FluentValidation;
 
-namespace BusinessLogic.Validators
+namespace Core.Validators
 {
     public class MovieValidators : AbstractValidator<Movie>
     {

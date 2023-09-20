@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using BusinessLogic.DTOs;
-using BusinessLogic.Interfaces;
-using BusinessLogic.Specifications;
-using DataAccess.Entities;
-using DataAccess.Interfaces;
+using Core.DTOs;
+using Core.Interfaces;
+using Core.Specifications;
+using Core.Entities;
+using Core.Interfaces;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using System;
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessLogic.Services
+namespace Core.Services
 {
     public class MoviesService : IMoviesService
     {
@@ -50,9 +50,6 @@ namespace BusinessLogic.Services
                 }
                 await _repoMovieGenre.SaveAsync();
             }
-
-
-
         }
 
         public async Task DeleteAsync(int id)
