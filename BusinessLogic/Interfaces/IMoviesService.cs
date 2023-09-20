@@ -13,7 +13,7 @@ namespace BusinessLogic.Interfaces
         Task<IEnumerable<MovieDto>> GetAllAsync();
         Task<IEnumerable<GenreDto>> GetGenresAsync();
         Task<MovieDto?> GetByIdAsync(int id);
-        Task CreateAsync(MovieDto movie);
+        Task CreateAsync(CreateMovieDto movie);
         Task EditAsync(MovieDto movie);
         Task DeleteAsync(int id);
     }

@@ -33,7 +33,7 @@ namespace WebAPI.Controllers
             return Ok(await _moviesService.GetByIdAsync(id));
         }
         [HttpPost("Create")]
-        public async Task<IActionResult> Create(MovieDto movie) {
+        public async Task<IActionResult> Create(CreateMovieDto movie) {
             await _moviesService.CreateAsync(movie);
             return Ok();
         }

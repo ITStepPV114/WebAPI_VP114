@@ -23,17 +23,36 @@ namespace BusinessLogic.Services
         public MoviesService(IRepository<Movie> repoMovie,
                              IRepository<Genre> repoGenre,
                              IRepository<MovieGenre> repoMovieGenre,
-                             IMapper mapper )
+                             IMapper mapper)
         {
             _repoMovie = repoMovie;
             _repoGenre = repoGenre;
             _repoMovieGenre = repoMovieGenre;
             _mapper = mapper;
         }
-        public async Task CreateAsync(MovieDto movie)
+        public async Task CreateAsync(CreateMovieDto movieDto)
         {
-            await _repoMovie.InsertAsync(_mapper.Map<Movie>(movie));
+            var movie = _mapper.Map<Movie>(movieDto);
+            await _repoMovie.InsertAsync(movie);
             await _repoMovie.SaveAsync();
+
+            //after SaveASync we can get movie id
+            if (movieDto.GenreIds != null)
+            {
+                foreach (var genreId in movieDto.GenreIds)
+                {
+                    await _repoMovieGenre.InsertAsync(new MovieGenre()
+                    {
+                        MovieId = movie.Id,
+                        GenreId = genreId
+                    });
+
+                }
+                await _repoMovieGenre.SaveAsync();
+            }
+
+
+
         }
 
         public async Task DeleteAsync(int id)
@@ -59,16 +78,16 @@ namespace BusinessLogic.Services
 
         public async Task<MovieDto?> GetByIdAsync(int id)
         {
-            var movie= await _repoMovie.GetItemBySpec(new MoviesSpec.ById(id));
+            var movie = await _repoMovie.GetItemBySpec(new MoviesSpec.ById(id));
             if (movie == null)
                 return null;
-                //throw new HttpRequestException("Not Found");
+            //throw new HttpRequestException("Not Found");
             return _mapper.Map<MovieDto>(movie);
         }
 
         public async Task<IEnumerable<GenreDto>> GetGenresAsync()
         {
-          List<Genre> genres = (await  _repoGenre.GetAsync()).ToList();
+            List<Genre> genres = (await _repoGenre.GetAsync()).ToList();
             return _mapper.Map<IEnumerable<GenreDto>>(genres);
 
 
