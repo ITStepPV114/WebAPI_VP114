@@ -9,6 +9,7 @@ using Infrastructure.Data;
 using Infrastructure;
 using Core.Services;
 using Core;
+using WebAPI;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -46,6 +47,7 @@ builder.Services.AddCustomServices();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -53,6 +55,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+//global hadler middleware
+app.UseMiddleware<ErrorHandlerMiddleware>();
+
 
 app.UseAuthorization();
 

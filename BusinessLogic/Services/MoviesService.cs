@@ -10,6 +10,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Core.Helpers;
+using System.Net;
 
 namespace Core.Services
 {
@@ -77,7 +79,8 @@ namespace Core.Services
         {
             var movie = await _repoMovie.GetItemBySpec(new MoviesSpec.ById(id));
             if (movie == null)
-                return null;
+                //throw new CustomHttpException($"Movie by {id} not found!", HttpStatusCode.NotFound);
+                throw new CustomHttpException(ErrorMessages.MovieNotFoundById, HttpStatusCode.NotFound);
             //throw new HttpRequestException("Not Found");
             return _mapper.Map<MovieDto>(movie);
         }
