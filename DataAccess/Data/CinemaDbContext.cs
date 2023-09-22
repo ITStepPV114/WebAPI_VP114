@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Infrastructure.Data
 {
-    public class CinemaDbContext:DbContext
+    public class CinemaDbContext:IdentityDbContext
     {
 
         //public ShopMVCDbContext()

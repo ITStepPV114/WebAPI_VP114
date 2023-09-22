@@ -25,8 +25,6 @@ builder.Services.AddControllers()
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
 
 builder.Services.AddSwaggerGen(options =>
 {
@@ -36,6 +34,8 @@ builder.Services.AddSwaggerGen(options =>
         Example = new OpenApiString("00:00:00")
     });
 });
+
+builder.Services.AddIdentity();
 //added using extensions
 builder.Services.AddRepository();
 builder.Services.AddValidators();
