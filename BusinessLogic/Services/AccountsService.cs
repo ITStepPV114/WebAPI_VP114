@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace Core.Services
 {
-    public class AccountService : IAccountServicecs
+    public class AccountsService : IAccountsService
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
 
-        public AccountService(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        public AccountsService(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -38,7 +38,7 @@ namespace Core.Services
             throw new NotImplementedException();
         }
 
-        public Task Registre(RegisterDto registerDto)
+        public Task Register(RegisterDto registerDto)
         {
            // var user = await _userManager.CreateAsync();
             throw new NotImplementedException();

@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Core.Interfaces
 {
-    public interface IAccountServicec
+    public interface IAccountsService
     {
         Task<IdentityUser> Get(string id);
         Task Login(LoginDto loginDto);
-        Task Registre(RegisterDto registerDto);
+        Task Register(RegisterDto registerDto);
         Task Logout();
     }
 }

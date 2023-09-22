@@ -29,6 +29,7 @@ namespace Core
         public static void AddCustomServices(this IServiceCollection servicesCollection)
         {
             servicesCollection.AddScoped<IMoviesService, MoviesService>();
+            servicesCollection.AddScoped<IAccountsService, AccountsService>();
         }
     }
 }
