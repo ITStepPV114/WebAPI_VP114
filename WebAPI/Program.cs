@@ -8,27 +8,25 @@ using System.Text.Json.Serialization;
 using Infrastructure.Data;
 using Infrastructure;
 using Core.Services;
+using Core;
 
 var builder = WebApplication.CreateBuilder(args);
 
 //get connection string
 string connection = builder.Configuration.GetConnectionString("CinemaContextConnection") ?? throw new InvalidOperationException("Connection string 'ShopMVCConnection' not found.");
-//add contect WebAppLibraryContext as service by application
-builder.Services.AddDbContext<CinemaDbContext>(options =>
-{
-    options.UseSqlServer(connection);
-    options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking); //for 
-});
+
+builder.Services.AddDbContext(connection);
 
 // Add services to the container.
 
 builder.Services.AddControllers()
     .AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles); ;
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped(typeof(IRepository<>),typeof(Repository<>));
+
 builder.Services.AddSwaggerGen(options =>
 {
     options.MapType<TimeSpan>(() => new OpenApiSchema
@@ -37,13 +35,14 @@ builder.Services.AddSwaggerGen(options =>
         Example = new OpenApiString("00:00:00")
     });
 });
+//added using extensions
+builder.Services.AddRepository();
+builder.Services.AddValidators();
+builder.Services.AddAutoMapper();
 
-builder.Services.AddFluentValidationAutoValidation();
-builder.Services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddCustomServices();
 
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
-builder.Services.AddScoped<IMoviesService, MoviesService>();
+//builder.Services.AddScoped<IMoviesService, MoviesService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
