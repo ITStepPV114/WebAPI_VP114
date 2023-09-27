@@ -61,11 +61,29 @@ namespace Core.Helpers {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid Creditional.
+        /// </summary>
+        internal static string InvalidCreditional {
+            get {
+                return ResourceManager.GetString("InvalidCreditional", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Movie by  id not found!.
         /// </summary>
         internal static string MovieNotFoundById {
             get {
                 return ResourceManager.GetString("MovieNotFoundById", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error! User by id not found!.
+        /// </summary>
+        internal static string UserNotFoundById {
+            get {
+                return ResourceManager.GetString("UserNotFoundById", resourceCulture);
             }
         }
     }
