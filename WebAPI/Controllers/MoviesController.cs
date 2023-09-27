@@ -4,6 +4,8 @@ using Core.Entities;
 using Core.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace WebAPI.Controllers
 {
@@ -17,6 +19,7 @@ namespace WebAPI.Controllers
             _moviesService = moviesService;
         }
 
+        [Authorize (AuthenticationSchemes =JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet] //GET: ~/api/movies
         //[HttpGet("all")] //GET: ~/api/movies/all
         //[HttpGet("/movies")] //GET: ~/movies

@@ -10,6 +10,9 @@ using Infrastructure;
 using Core.Services;
 using Core;
 using WebAPI;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -43,6 +46,26 @@ builder.Services.AddAutoMapper();
 
 builder.Services.AddCustomServices();
 
+//add  jwt-token
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(o =>
+{
+    o.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = false,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer =  builder.Configuration["Jwt:Issuer"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
+
+    };
+});
+
 //builder.Services.AddScoped<IMoviesService, MoviesService>();
 var app = builder.Build();
 
@@ -58,7 +81,7 @@ app.UseHttpsRedirection();
 //global hadler middleware
 app.UseMiddleware<ErrorHandlerMiddleware>();
 
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
