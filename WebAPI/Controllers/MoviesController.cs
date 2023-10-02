@@ -41,6 +41,7 @@ namespace WebAPI.Controllers
             return Ok();
         }
 
+        
         [HttpPut("Edit")]
         public async Task<IActionResult> Edit(MovieDto movie)
         {
@@ -48,7 +49,7 @@ namespace WebAPI.Controllers
             return Ok();
         }
 
-        [HttpDelete]
+        [HttpDelete, Authorize]
         public async Task<IActionResult> Delete(int id) {
             await _moviesService.DeleteAsync(id);
             return Ok();
