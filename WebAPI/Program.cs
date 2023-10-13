@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
 
 //get connection string
@@ -90,6 +91,15 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
+//add CROS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      builder =>
+                      {
+                          builder.WithOrigins("http://localhost:4200");
+                      });
+});
 //builder.Services.AddScoped<IMoviesService, MoviesService>();
 var app = builder.Build();
 
@@ -104,6 +114,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 //global hadler middleware
 app.UseMiddleware<ErrorHandlerMiddleware>();
+//use Cors
+app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthentication();
 app.UseAuthorization();

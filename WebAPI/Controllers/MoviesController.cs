@@ -19,7 +19,6 @@ namespace WebAPI.Controllers
             _moviesService = moviesService;
         }
 
-        [Authorize (AuthenticationSchemes =JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet] //GET: ~/api/movies
         //[HttpGet("all")] //GET: ~/api/movies/all
         //[HttpGet("/movies")] //GET: ~/movies
@@ -42,6 +41,7 @@ namespace WebAPI.Controllers
         }
 
         
+        [Authorize (AuthenticationSchemes =JwtBearerDefaults.AuthenticationScheme)]
         [HttpPut("Edit")]
         public async Task<IActionResult> Edit(MovieDto movie)
         {
