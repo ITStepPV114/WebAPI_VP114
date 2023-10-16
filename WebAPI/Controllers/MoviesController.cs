@@ -19,6 +19,7 @@ namespace WebAPI.Controllers
             _moviesService = moviesService;
         }
 
+
         [HttpGet] //GET: ~/api/movies
         //[HttpGet("all")] //GET: ~/api/movies/all
         //[HttpGet("/movies")] //GET: ~/movies
@@ -29,11 +30,23 @@ namespace WebAPI.Controllers
             return Ok(await _moviesService.GetAllAsync());
         }
 
+
+        [HttpGet("Genres")] //GET: ~/api/movies/genres
+        public async Task<IActionResult> GetGenres()
+        {
+            //    Movies.Include(x => x.Genres).ThenInclude(x => x.Genre);
+
+            return Ok(await _moviesService.GetGenresAsync());
+        }
+
         [HttpGet("{id}")] 
         public async Task<IActionResult> Get([FromRoute] int id)  //default FromQuery   => ~/api/movies?id=2   //FromRoute => ~/api/movies/2
         { 
             return Ok(await _moviesService.GetByIdAsync(id));
         }
+
+
+
         [HttpPost("Create")]
         public async Task<IActionResult> Create(CreateMovieDto movie) {
             await _moviesService.CreateAsync(movie);
