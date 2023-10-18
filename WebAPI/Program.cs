@@ -91,7 +91,7 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-//add CROS
+//add CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: MyAllowSpecificOrigins,
