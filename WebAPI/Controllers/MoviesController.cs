@@ -62,8 +62,8 @@ namespace WebAPI.Controllers
             return Ok();
         }
 
-        [HttpDelete(), Authorize]
-        public async Task<IActionResult> Delete(int id) {
+        [HttpDelete("{id}"), Authorize]
+        public async Task<IActionResult> Delete([FromRoute]int id) {
             await _moviesService.DeleteAsync(id);
             return Ok();
         }
