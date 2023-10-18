@@ -11,6 +11,7 @@ using System.Linq;
 using System.Net;
 using System.Security.Claims;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Core.Services
@@ -66,9 +67,9 @@ namespace Core.Services
                 signingCredentials: signinCredentials
             );
 
-            var tokenString = new JwtSecurityTokenHandler().WriteToken(tokeOptions);
+            var tokenString =JsonSerializer.Serialize(new JwtSecurityTokenHandler().WriteToken(tokeOptions));
             
-            return tokenString;
+            return  tokenString;
             
         }
 
