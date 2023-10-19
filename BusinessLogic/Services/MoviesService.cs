@@ -62,6 +62,13 @@ namespace Core.Services
             await _repoMovie.SaveAsync();
         }
 
+        public async Task DeleteAsync(Movie movie)
+        {
+            if (_repoMovie.GetByIDAsync(movie.Id) == null)
+                return;
+            await _repoMovie.DeleteAsync(movie);
+            await _repoMovie.SaveAsync();
+        }
         public async Task EditAsync(MovieDto movie)
         {
             await _repoMovie.UpdateAsync(_mapper.Map<Movie>(movie));

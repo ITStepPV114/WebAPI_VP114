@@ -19,8 +19,8 @@ namespace WebAPI.Controllers
             _moviesService = moviesService;
         }
 
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet] //GET: ~/api/movies
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         //[HttpGet("all")] //GET: ~/api/movies/all
         //[HttpGet("/movies")] //GET: ~/movies
         public async Task<IActionResult> Get()
@@ -54,16 +54,18 @@ namespace WebAPI.Controllers
         }
 
 
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPut("Edit")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> Edit(MovieDto movie)
         {
             await _moviesService.EditAsync(movie);
             return Ok();
         }
 
+
         [HttpDelete("{id}"), Authorize]
-        public async Task<IActionResult> Delete([FromRoute]int id) {
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<IActionResult> Delete([FromRoute] int id) {
             await _moviesService.DeleteAsync(id);
             return Ok();
         }
