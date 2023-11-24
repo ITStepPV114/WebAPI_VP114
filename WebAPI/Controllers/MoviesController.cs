@@ -1,8 +1,5 @@
 ﻿using Core.DTOs;
 using Core.Interfaces;
-using Core.Entities;
-using Core.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -20,7 +17,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet] //GET: ~/api/movies
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         //[HttpGet("all")] //GET: ~/api/movies/all
         //[HttpGet("/movies")] //GET: ~/movies
         public async Task<IActionResult> Get()
