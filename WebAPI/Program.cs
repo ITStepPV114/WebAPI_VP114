@@ -108,7 +108,7 @@ options.AddPolicy(name: MyAllowSpecificOrigins,
 
                   });
 
-//});
+});
 //builder.Services.AddScoped<IMoviesService, MoviesService>();
 var app = builder.Build();
 
