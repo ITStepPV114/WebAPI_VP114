@@ -95,19 +95,19 @@ builder.Services.AddAuthentication(options =>
 });
 
 //add CORS
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy(name: MyAllowSpecificOrigins,
-                      builder =>
-                      {
-                        //  builder.WithOrigins("http://localhost:4200");
+//builder.Services.AddCors(options =>
+//{
+//    options.AddPolicy(name: MyAllowSpecificOrigins,
+//                      builder =>
+//                      {
+//                        //  builder.WithOrigins("http://localhost:4200");
 
-                          builder.AllowAnyHeader();
-                          builder.AllowAnyMethod();
-                          builder.AllowAnyOrigin();
-                      });
+//                          builder.AllowAnyHeader();
+//                          builder.AllowAnyMethod();
+//                          builder.AllowAnyOrigin();
+//                      });
   
-});
+//});
 //builder.Services.AddScoped<IMoviesService, MoviesService>();
 var app = builder.Build();
 
@@ -123,13 +123,14 @@ app.UseHttpsRedirection();
 //global hadler middleware
 app.UseMiddleware<ErrorHandlerMiddleware>();
 //use Cors
-app.UseCors(MyAllowSpecificOrigins);
+//app.UseCors(MyAllowSpecificOrigins);
 
-//app.UseCors(opt => {
-//    opt.AllowAnyHeader();
-//    opt.AllowAnyMethod();
-//    opt.AllowAnyOrigin();
-//});
+app.UseCors(opt =>
+{
+    opt.AllowAnyHeader();
+    opt.AllowAnyMethod();
+    opt.AllowAnyOrigin();
+});
 
 app.UseAuthentication();
 app.UseAuthorization();
