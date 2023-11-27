@@ -104,7 +104,7 @@ options.AddPolicy(name: MyAllowSpecificOrigins,
                       builder.AllowAnyHeader();
                       builder.AllowAnyMethod();
                       builder.AllowAnyOrigin();
-                      builder.AllowCredentials();
+                      //builder.AllowCredentials();
 
                   });
 
