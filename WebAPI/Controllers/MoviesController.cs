@@ -17,7 +17,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet] //GET: ~/api/movies
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         //[HttpGet("all")] //GET: ~/api/movies/all
         //[HttpGet("/movies")] //GET: ~/movies
         public async Task<IActionResult> Get()
